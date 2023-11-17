@@ -38,6 +38,7 @@ class TrafficLight:
             self.traffic_lights_on_prioritisation()
 
 
+
 if __name__ == '__main__':
     lanes = ["Lane1", "Lane2", "Lane3", "Lane4"]
     traffic_light = TrafficLight(lanes)
