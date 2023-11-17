@@ -1,10 +1,12 @@
 import random
 import time
 
+
 class TrafficLight:
     def __init__(self, lanes):
-        self.lanes = {lane: [] for lane in lanes}
         self.green_lane = None
+        self.lanes = {lane: [] for lane in lanes}
+        self.green_lane_index = 0
 
     def measure_traffic(self):
         for lane in self.lanes:
@@ -16,21 +18,25 @@ class TrafficLight:
     def prioritisation(self):
         temppriority = [[], []]
         for lane, distances in self.measure_traffic().items():
-            sum_dist = sum(distances)
             temppriority[0].append(lane)
-            temppriority[1].append(sum_dist / len(distances))
+            temppriority[1].append(len(distances))
 
         priority1, priority2 = zip(*sorted(zip(temppriority[1], temppriority[0])))
         return list(priority2)
 
     def traffic_lights_on_prioritisation(self):
         prioritized_lanes = self.prioritisation()
-        if self.green_lane:
-            print(f"Red light for {self.green_lane} lane.")
-            time.sleep(2)
-        self.green_lane = prioritized_lanes[0]
-        print(f"Green light for {self.green_lane} lane.")
-        time.sleep(5)
+
+        if self.green_lane_index < len(prioritized_lanes):
+            if self.green_lane_index >= 0:
+                print(f"Red light for {prioritized_lanes[self.green_lane_index - 1]} lane.")
+                time.sleep(2)
+                self.green_lane = prioritized_lanes[self.green_lane_index]
+                print(f"Green light for {prioritized_lanes[self.green_lane_index]} lane.")
+                time.sleep(5)
+                self.green_lane_index += 1
+            else:
+                self.green_lane_index = 0
 
     def run_traffic_lights(self, duration):
         start_time = time.time()
@@ -38,8 +44,9 @@ class TrafficLight:
             self.traffic_lights_on_prioritisation()
 
 
-
 if __name__ == '__main__':
     lanes = ["Lane1", "Lane2", "Lane3", "Lane4"]
     traffic_light = TrafficLight(lanes)
-    traffic_light.run_traffic_lights(30)
+    a = traffic_light.prioritisation()
+    print(a)
+    traffic_light.run_traffic_lights(60)
