@@ -29,11 +29,11 @@ class TrafficLight:
 
         if self.green_lane_index < len(prioritized_lanes):
             if self.green_lane_index >= 0:
-                print(f"Red light for {prioritized_lanes[self.green_lane_index - 1]} lane.")
-                time.sleep(2)
-                self.green_lane = prioritized_lanes[self.green_lane_index]
                 print(f"Green light for {prioritized_lanes[self.green_lane_index]} lane.")
                 time.sleep(5)
+                self.green_lane = prioritized_lanes[self.green_lane_index]
+                print(f"Red light for {prioritized_lanes[self.green_lane_index]} lane.")
+                time.sleep(2)
                 self.green_lane_index += 1
             else:
                 self.green_lane_index = 0
@@ -43,10 +43,3 @@ class TrafficLight:
         while time.time() - start_time < duration:
             self.traffic_lights_on_prioritisation()
 
-
-if __name__ == '__main__':
-    lanes = ["Lane1", "Lane2", "Lane3", "Lane4"]
-    traffic_light = TrafficLight(lanes)
-    a = traffic_light.prioritisation()
-    print(a)
-    traffic_light.run_traffic_lights(60)
