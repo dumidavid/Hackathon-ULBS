@@ -606,4 +606,5 @@ class Main:
         pygame.display.update()
         clock.tick(100)
 
+
 Main()
