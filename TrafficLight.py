@@ -7,7 +7,7 @@ import sys
 # Default values of signal timers
 defaultGreen = {0: 10, 1: 10, 2: 10, 3: 10}
 defaultRed = 150
-defaultYellow = 5
+defaultYellow = 2
 
 signals = []
 noOfSignals = 4
@@ -51,7 +51,7 @@ mid = {'right': {'x': 705, 'y': 445}, 'down': {'x': 695, 'y': 450}, 'left': {'x'
 # set random or default green signal time here
 randomGreenSignalTimer = True
 # set random green signal time range here
-randomGreenSignalTimerRange = [10, 20]
+randomGreenSignalTimerRange = [5, 10]
 
 pygame.init()
 simulation = pygame.sprite.Group()
@@ -577,27 +577,17 @@ class Main:
                 sys.exit()
 
         screen.blit(background, (0, 0))  # display background in simulation
-        for i in range(0,
-                       noOfSignals):  # display signal and set timer according to current status: green, yello, or red
-            if i == currentGreen:
-                if currentYellow == 1:
-                    signals[i].signalText = signals[i].yellow
-                    screen.blit(yellowSignal, signalCoods[i])
-                else:
-                    signals[i].signalText = signals[i].green
-                    screen.blit(greenSignal, signalCoods[i])
-            else:
-                if signals[i].red <= 10:
-                    signals[i].signalText = signals[i].red
-                else:
-                    signals[i].signalText = "---"
-                screen.blit(redSignal, signalCoods[i])
-        signalTexts = ["", "", "", ""]
 
         # display signal timer
         for i in range(0, noOfSignals):
-            signalTexts[i] = font.render(str(signals[i].signalText), True, white, black)
-            screen.blit(signalTexts[i], signalTimerCoods[i])
+            # Display the signal lights without timers
+            if i == currentGreen:
+                if currentYellow == 1:
+                    screen.blit(yellowSignal, signalCoods[i])
+                else:
+                    screen.blit(greenSignal, signalCoods[i])
+            else:
+                screen.blit(redSignal, signalCoods[i])
 
         # display the vehicles
         for vehicle in simulation:
