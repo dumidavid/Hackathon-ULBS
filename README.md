@@ -1,8 +1,20 @@
 # Hackathon-ULBS
-Acest Repo este pentru proiectul Hackathon Open Your Mind
-Echipa Logiscool Sibiu
+Hackathon Open Your Mind
 
-Tema proiect: Transport Urban
+Team Logiscool Sibiu
+Members:
+- Bostan Nicolas
+- Turda Matei
+- Petre Stefan
+- Antonescu Eduard
+- Dumitrescu David
+
+Goals of the project:
+- gaining git knowledge
+- working on a team project environment
+- experiencing the software development area
+
+Project Theme: Urban Transportation
 
 ____Basic Git Commands____
 
